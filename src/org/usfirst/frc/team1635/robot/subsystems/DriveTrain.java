@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
- *
+ * @Authors : Jing Wei Li (SKRUB HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class DriveTrain extends Subsystem {
 	private SpeedController frontLeft, backLeft, frontRight, backRight;

@@ -8,12 +8,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team1635.robot.commands.Autonomous;
 import org.usfirst.frc.team1635.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team1635.robot.subsystems.Climber;
+import org.usfirst.frc.team1635.robot.subsystems.Lifter;
 import org.usfirst.frc.team1635.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1635.robot.subsystems.Intaker;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,7 +27,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain drivetrain;
 	public static Intaker intaker;
-	public static Climber climber;
+	public static Lifter climber;
 	public static OI oi;
 	
 
@@ -40,7 +41,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	drivetrain = new DriveTrain();
 		intaker = new Intaker();
-    	climber = new Climber();
+    	climber = new Lifter();
     	oi = new OI();
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new Autonomous());
@@ -54,7 +55,7 @@ public class Robot extends IterativeRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+    	
     }
 	
 	public void disabledPeriodic() {

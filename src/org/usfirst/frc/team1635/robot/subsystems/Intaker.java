@@ -51,6 +51,7 @@ public class Intaker extends Subsystem {
 			if (leftInput) {
 				// the right trigger should move the lift up.
 				output = -1;
+				
 			} else if (rightInput){
 				// the left trigger should move the lift down
 				output = 1;

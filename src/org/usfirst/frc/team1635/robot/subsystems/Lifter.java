@@ -12,12 +12,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Climber extends Subsystem {
-	SpeedController winch;
+public class Lifter extends Subsystem {
+	SpeedController leftWinch,rightWinch;
 	Solenoid hookExtender, hookRaiser;
 	
-	public Climber(){
-		winch = new TalonSRX(RobotMap.kWinchPort);
+	public Lifter(){
+		leftWinch = new TalonSRX(RobotMap.kLeftWinchPort);
+		rightWinch = new TalonSRX(RobotMap.kRightWinchPort);
 
 		hookExtender= new Solenoid(RobotMap.kHookExtenderPort);
 		hookRaiser = new Solenoid(RobotMap.kHookRaiserPort);
@@ -36,7 +37,7 @@ public class Climber extends Subsystem {
 			if (leftInput > 0) {
 				// the right trigger should move the lift up.
 				output = leftInput * -1;
-			} else {
+			} else if(rightInput > 0){
 				// the left trigger should move the lift down
 				output = rightInput;
 			}
@@ -45,7 +46,8 @@ public class Climber extends Subsystem {
 	}
 	
 	public void operateWinchFinal(double input2){
-		winch.set(input2);		
+		leftWinch.set(input2);	
+		rightWinch.set(input2);
 	}
 	
 	public void liftHookExtender(Joystick joy_y){
@@ -67,7 +69,8 @@ public class Climber extends Subsystem {
 	}
 	
 	public void StopClimber(){
-		winch.set(0);
+		leftWinch.set(0);
+		rightWinch.set(0);
 	}
 		
 	
