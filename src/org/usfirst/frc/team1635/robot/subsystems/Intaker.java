@@ -6,6 +6,7 @@ import org.usfirst.frc.team1635.robot.commands.IntakeWithJoystick;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,12 +50,12 @@ public class Intaker extends Subsystem {
 			output = 0.0;
 		} else {
 			if (leftInput) {
-				// the right trigger should move the lift up.
-				output = -1;
+				//the left button LB should roll the ball in
+				output = 1;
 				
 			} else if (rightInput){
-				// the left trigger should move the lift down
-				output = 1;
+				// the right button RB should roll the ball out
+				output = -1;
 			}
 		}
 		PressureCheck(output,joy1);
@@ -64,7 +65,8 @@ public class Intaker extends Subsystem {
 
 		double outputspd = 0.0;
 
-		if (obtainPressureLevel() > RobotMap.kPressureLimit && joy_x.getRawButton(5)) {
+		if (obtainPressureLevel() < RobotMap.kPressureLimit && joy_x.getRawButton(5)) {
+			Timer.delay(0.1);//delay the locking mechanism to allow more grip on the ball
 			outputspd = 0.0;
 		} else {
 			outputspd = input;

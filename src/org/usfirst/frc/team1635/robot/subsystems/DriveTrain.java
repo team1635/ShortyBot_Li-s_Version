@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
- * @Authors : Jing Wei Li (SKRUB HUNTER) , Miguel Cruz (@Acelogic_ )
+ * @Authors : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class DriveTrain extends Subsystem {
 	private SpeedController frontLeft, backLeft, frontRight, backRight;
@@ -52,7 +52,11 @@ public class DriveTrain extends Subsystem {
 		drive.tankDrive(joy.getY(), joy.getRawAxis(5));
 	}
     
-    public void driveParameters(double left, double right){
+    public void chrys_DeeznutsIllegalDriveMethod(Joystick MLGstick){
+    	drive.tankDrive( - MLGstick.getY(),- MLGstick.getRawAxis(5));
+    	
+    }
+    public void driveWithParameters(double left, double right){
     	
     	drive.tankDrive(left, right);
     }
