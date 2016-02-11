@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * @author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ ) , Simranjeet Singh (10110101)
+ * @author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ ) 
  */
 public class Intaker extends Subsystem {
 	TalonSRX talon;
