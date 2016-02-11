@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team1635.robot.Robot;
 
 /**
- *
+ * @author: Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class DriveWithJoystick extends Command {
 
@@ -26,7 +26,7 @@ public class DriveWithJoystick extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return false;																																																																																																																
     }
 
     // Called once after isFinished returns true

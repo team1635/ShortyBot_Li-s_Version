@@ -4,6 +4,9 @@ package org.usfirst.frc.team1635.robot;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ * 
+ * 
+ * : @author: Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class RobotMap {
 	//PWM ports

@@ -5,7 +5,7 @@ import org.usfirst.frc.team1635.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *@author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class IntakeWithJoystick extends Command {
 
@@ -22,7 +22,8 @@ public class IntakeWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.intaker.Operate(Robot.oi.getJoystick());
-    	Robot.intaker.liftIntaker(Robot.oi.getJoystick());
+    	//Robot.intaker.liftIntaker(Robot.oi.getJoystick());
+    	Robot.intaker.intakeOneButton(Robot.oi.getJoystick());
     }
 
     // Make this return true when this Command no longer needs to run execute()

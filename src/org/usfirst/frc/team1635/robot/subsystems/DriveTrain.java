@@ -52,8 +52,8 @@ public class DriveTrain extends Subsystem {
 		drive.tankDrive(joy.getY(), joy.getRawAxis(5));
 	}
     
-    public void chrys_DeeznutsIllegalDriveMethod(Joystick MLGstick){
-    	drive.tankDrive( - MLGstick.getY(),- MLGstick.getRawAxis(5));
+    public void Chrys_s_DeeznutsIllegalDriveMethod(Joystick MLGstick){
+    	drive.tankDrive(- MLGstick.getY(),- MLGstick.getRawAxis(5));
     	
     }
     public void driveWithParameters(double left, double right){

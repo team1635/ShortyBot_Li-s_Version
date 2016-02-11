@@ -5,7 +5,7 @@ import org.usfirst.frc.team1635.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * @author:Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class ClimbWithJoystick extends Command {
 
@@ -24,8 +24,10 @@ public class ClimbWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.climber.operateWinch(Robot.oi.getJoystick());
-    	Robot.climber.liftHookExtender(Robot.oi.getJoystick());
-    	Robot.climber.liftHookRaiser(Robot.oi.getJoystick());
+//    	Robot.climber.liftHookExtender(Robot.oi.getJoystick());
+//    	Robot.climber.liftHookRaiser(Robot.oi.getJoystick());
+    	Robot.climber.extendHookOneButton(Robot.oi.getJoystick());
+    	Robot.climber.raiseHookOneButton(Robot.oi.getJoystick());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * @author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ ) , Simranjeet Singh (10110101)
  */
 public class Intaker extends Subsystem {
 	TalonSRX talon;
@@ -67,9 +67,11 @@ public class Intaker extends Subsystem {
 
 		if (obtainPressureLevel() < RobotMap.kPressureLimit && joy_x.getRawButton(5)) {
 			Timer.delay(0.1);//delay the locking mechanism to allow more grip on the ball
+			// for debugging System.out.println("Pressure Detected");
 			outputspd = 0.0;
 		} else {
 			outputspd = input;
+			// for debugging System.out.println("Pressure null");
 		}
 
 		operateIntaker(outputspd);
@@ -96,6 +98,16 @@ public class Intaker extends Subsystem {
 		}	
 	}
 	
+	public void intakeOneButton(Joystick joyy){
+		if(joyy.getRawButton(4)){
+			if(IntakerLifter.get()){
+				IntakerLifter.set(false);
+			}else if (!IntakerLifter.get()){
+				IntakerLifter.set(true);
+			}
+		}
+		
+	}
 	public void stopIntaker() {
 		talon.set(0);
 	}

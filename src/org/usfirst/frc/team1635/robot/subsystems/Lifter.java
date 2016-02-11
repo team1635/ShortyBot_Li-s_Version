@@ -8,9 +8,10 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * @author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class Lifter extends Subsystem {
 	SpeedController leftWinch,rightWinch;
@@ -25,7 +26,8 @@ public class Lifter extends Subsystem {
 	}
 	
 	public void operateWinch(Joystick joy3){
-		double leftInput = joy3.getRawAxis(2);
+		double output = 0;
+		//double leftInput = joy3.getRawAxis(2);
 //		double rightInput = joy3.getRawAxis(3);
 //		double output = 0.0;
 //		
@@ -41,7 +43,10 @@ public class Lifter extends Subsystem {
 //				output = rightInput;
 //			}
 //		}
-		operateWinchFinal(leftInput);
+		if(joy3.getRawButton(8)){
+			output = 1;
+		}
+		operateWinchFinal(output);
 	}
 	
 	public void operateWinchFinal(double input2){
@@ -71,8 +76,30 @@ public class Lifter extends Subsystem {
 		leftWinch.set(0);
 		rightWinch.set(0);
 	}
-		
 	
+	public void extendHookOneButton(Joystick MLG_exe){
+		if (MLG_exe.getRawButton(7)){
+			if(hookExtender.get()){
+				hookExtender.set(false);
+			}else if(!hookExtender.get()){
+				hookExtender.set(true);
+			}
+		}	
+	}
+	
+	public void raiseHookOneButton(Joystick joy){
+		if(joy.getRawButton(2)){
+			if(hookRaiser.get()){
+				hookRaiser.set(false);
+			}else if (!hookRaiser.get()){
+				hookRaiser.set(true);
+			}
+		}
+	}
+		
+	public void log() { 
+		SmartDashboard.putBoolean("IsExtended", hookExtender.get());		
+	}
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

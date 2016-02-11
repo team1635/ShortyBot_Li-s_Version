@@ -3,7 +3,7 @@ package org.usfirst.frc.team1635.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * @author: Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class Autonomous extends CommandGroup {
     
