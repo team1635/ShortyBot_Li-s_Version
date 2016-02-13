@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * @author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ ) , Simranjeet Singh (10110101)
+ * @author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ ) 
  */
 public class Intaker extends Subsystem {
 	TalonSRX talon;
@@ -34,9 +34,14 @@ public class Intaker extends Subsystem {
 		IntakerLifter = new Solenoid(RobotMap.kIntakerLifterPort);
 
 	}
-	
+	public double ObtainTalonLastSetValue(){ // Made by miguel
+		double getTalonValue = talon.get();
+		return getTalonValue; 
+		
+}
 	public void log(){
 		SmartDashboard.putNumber("Pressurelevel", obtainPressureLevel());
+		SmartDashboard.putNumber("TalonSRXlastSetValue", ObtainTalonLastSetValue());
 		
 	} 
 

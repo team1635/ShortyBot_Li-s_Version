@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1635.robot.subsystems;
 
 import org.usfirst.frc.team1635.robot.RobotMap;
+import org.usfirst.frc.team1635.robot.commands.CalibrateMotor;
 import org.usfirst.frc.team1635.robot.commands.ClimbWithJoystick;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -25,24 +26,28 @@ public class Lifter extends Subsystem {
 		hookRaiser = new Solenoid(RobotMap.kHookRaiserPort);
 	}
 	
+	public void calibrateMotor(Joystick joz){
+		double leftInput = joz.getRawAxis(2);
+		double rightInput = joz.getRawAxis(3);
+		double output = 0.0;
+		
+		if ((rightInput > 0.0) && (leftInput > 0.0)) {
+			// both triggers are pressed so we shouldn't move the lift
+			output = 0.0;
+		} else {
+			if (leftInput > 0) {
+				// the right trigger should move the lift up.
+				output = leftInput ;
+			} else if(rightInput > 0){
+				// the left trigger should move the lift down
+				output = rightInput * -1;
+			}	
+		} operateWinchFinal(output);			
+	}
+	
 	public void operateWinch(Joystick joy3){
 		double output = 0;
-		//double leftInput = joy3.getRawAxis(2);
-//		double rightInput = joy3.getRawAxis(3);
-//		double output = 0.0;
-//		
-//		if ((rightInput > 0.0) && (leftInput > 0.0)) {
-//			// both triggers are pressed so we shouldn't move the lift
-//			output = 0.0;
-//		} else {
-//			if (leftInput > 0) {
-//				// the right trigger should move the lift up.
-//				output = leftInput * -1;
-//			} else if(rightInput > 0){
-//				// the left trigger should move the lift down
-//				output = rightInput;
-//			}
-//		}
+		
 		if(joy3.getRawButton(8)){
 			output = 1;
 		}
@@ -106,7 +111,8 @@ public class Lifter extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new ClimbWithJoystick());
+        //setDefaultCommand(new ClimbWithJoystick());
+    	setDefaultCommand(new CalibrateMotor());
     }
 }
 
