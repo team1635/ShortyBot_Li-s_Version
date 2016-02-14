@@ -14,6 +14,7 @@ import org.usfirst.frc.team1635.robot.commands.Autonomous4;
 import org.usfirst.frc.team1635.robot.commands.DriveTimeout;
 import org.usfirst.frc.team1635.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team1635.robot.subsystems.Lifter;
+import org.usfirst.frc.team1635.robot.subsystems.DoubleCamera;
 import org.usfirst.frc.team1635.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1635.robot.subsystems.Intaker;
 
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain drivetrain;
 	public static Intaker intaker;
 	public static Lifter climber;
+	public static DoubleCamera doublecamera;
 	public static OI oi;
 
 	public DigitalInput swich, swich2;
@@ -49,7 +51,9 @@ public class Robot extends IterativeRobot {
 		drivetrain = new DriveTrain();
 		intaker = new Intaker();
 		climber = new Lifter();
+		
 		oi = new OI();
+		doublecamera = new DoubleCamera();
 		// chooser = new SendableChooser();
 		// chooser.addDefault("Default Auto", new Autonomous());
 		//// chooser.addObject("My Auto", new MyAutoCommand());

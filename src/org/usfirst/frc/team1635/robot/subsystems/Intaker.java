@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1635.robot.subsystems;
 
-import org.usfirst.frc.team1635.robot.Robot;
 import org.usfirst.frc.team1635.robot.RobotMap;
 import org.usfirst.frc.team1635.robot.commands.IntakeWithJoystick;
 import edu.wpi.first.wpilibj.AnalogInput;

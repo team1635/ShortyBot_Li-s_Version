@@ -28,7 +28,7 @@ public class RobotMap {
     public static int kIntakerLifterPort = 1;//solenoid
     public static int kHookExtenderPort = 3;//TODO used to be port 0
     public static int kHookRaiserPort = 2;
-    public static int kGearShifterPort = 0;
+    public static int kGearShifterPort = 4;
     
     //DIO ports
     public static int kFirstSwitchPort = 0;

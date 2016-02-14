@@ -2,6 +2,7 @@ package org.usfirst.frc.team1635.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import org.usfirst.frc.team1635.robot.commands.DriveWithJoystick;
 
 /**
@@ -42,10 +43,6 @@ public class OI {
 	
 	public OI(){
 		stick = new Joystick(0);	
-//		
-//		new JoystickButton(stick, 1).whenPressed(new FirstCam());
-//		new JoystickButton(stick, 2).whenPressed(new SecondCam());
-//		new JoystickButton(stick, 3).whenPressed(new StopCam());
 		
 	}
 	

@@ -29,7 +29,7 @@ public class ClimbWithJoystick extends Command {
 //    	Robot.climber.liftHookExtender(Robot.oi.getJoystick());
 //    	Robot.climber.liftHookRaiser(Robot.oi.getJoystick());
     
-//    	Robot.climber.extendHookOneButton(Robot.oi.getJoystick());
+     	Robot.climber.extendHookOneButton(Robot.oi.getJoystick());
 //    	Robot.climber.raiseHookOneButton(Robot.oi.getJoystick());
     }
 
