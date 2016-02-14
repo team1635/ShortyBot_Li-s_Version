@@ -10,11 +10,11 @@ package org.usfirst.frc.team1635.robot;
  */
 public class RobotMap {
 	//PWM ports
-	public static int kDriveTrain_FrontLeftMotorController = 6;//0
-	public static int kDriveTrain_BackLeftMotorController = 2;
-	public static int kDriveTrain_FrontRightMotorController = 1;//1
-	public static int kDriveTrain_BackRightMotorController = 3;//3
-	public static int kIntakerTalonPort = 0;//
+	public static int kDriveTrain_FrontLeftMotorController = 1;//0
+	public static int kDriveTrain_BackLeftMotorController = 0;
+	public static int kDriveTrain_FrontRightMotorController = 3;//1
+	public static int kDriveTrain_BackRightMotorController = 2;//3
+	public static int kIntakerTalonPort = 6;//0
 	public static int kLeftWinchPort = 4;
 	public static int kRightWinchPort = 5;
 	
@@ -26,15 +26,11 @@ public class RobotMap {
     
    //solenoid ports on the PCM 
     public static int kIntakerLifterPort = 1;//solenoid
-    public static int kHookExtenderPort = 0;//TODO
+    public static int kHookExtenderPort = 3;//TODO used to be port 0
     public static int kHookRaiserPort = 2;
-    // For example to map the left and right motors, you could define the
-    // following variables to use with your drivetrain subsystem.
-    // public static int leftMotor = 1;
-    // public static int rightMotor = 2;
+    public static int kGearShifterPort = 0;
     
-    // If you are using multiple modules, make sure to define both the port
-    // number and the module. For example you with a rangefinder:
-    // public static int rangefinderPort = 1;
-    // public static int rangefinderModule = 1;
+    //DIO ports
+    public static int kFirstSwitchPort = 0;
+    public static int kSecondSwitchPort =1;
 }

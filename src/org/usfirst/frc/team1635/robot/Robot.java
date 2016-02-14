@@ -11,6 +11,7 @@ import org.usfirst.frc.team1635.robot.commands.Autonomous;
 import org.usfirst.frc.team1635.robot.commands.Autonomous2;
 import org.usfirst.frc.team1635.robot.commands.Autonomous3;
 import org.usfirst.frc.team1635.robot.commands.Autonomous4;
+import org.usfirst.frc.team1635.robot.commands.DriveTimeout;
 import org.usfirst.frc.team1635.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team1635.robot.subsystems.Lifter;
 import org.usfirst.frc.team1635.robot.subsystems.DriveTrain;
@@ -37,7 +38,7 @@ public class Robot extends IterativeRobot {
 
 	public DigitalInput swich, swich2;
 
-	Command autonomousCommand, auto1, auto2, auto3, auto4;
+	Command autonomousCommand, auto1, auto2, auto3, auto4, testAuto;
 	SendableChooser chooser;
 
 	/**
@@ -53,24 +54,28 @@ public class Robot extends IterativeRobot {
 		// chooser.addDefault("Default Auto", new Autonomous());
 		//// chooser.addObject("My Auto", new MyAutoCommand());
 		// SmartDashboard.putData("Auto mode", chooser);
-		swich = new DigitalInput(0);
-		swich2 = new DigitalInput(1);
+		swich = new DigitalInput(RobotMap.kFirstSwitchPort);
+		swich2 = new DigitalInput(RobotMap.kSecondSwitchPort);
 
 		auto1 = new Autonomous();
 		auto2 = new Autonomous2();
 		auto3 = new Autonomous3();
 		auto4 = new Autonomous4();
 
+		SmartDashboard.putData("timeoutAuto", new DriveTimeout(0.5, 0.5, 17));
+
+		// testAuto = new DriveTimeout();
+
 	}
 
 	public Command selectAutonomous() {
-		if (!swich.get() && !swich2.get()) {//both switches off
+		if (!swich.get() && !swich2.get()) {// both switches off
 			autonomousCommand = auto1;
-		} else if (swich.get() && !swich2.get()) {//switch 1 on
+		} else if (swich.get() && !swich2.get()) {// switch 1 on
 			autonomousCommand = auto2;
-		} else if (!swich.get() && swich2.get()) {//switch 2 on
+		} else if (!swich.get() && swich2.get()) {// switch 2 on
 			autonomousCommand = auto3;
-		} else if (swich.get() && swich2.get()) {//both switches on
+		} else if (swich.get() && swich2.get()) {// both switches on
 			autonomousCommand = auto4;
 		}
 		return autonomousCommand;
@@ -105,6 +110,9 @@ public class Robot extends IterativeRobot {
 		if (selectAutonomous() != null)
 			selectAutonomous().start();
 	}
+	// if (testAuto != null)
+	// testAuto.start();
+	// }
 
 	/**
 	 * This function is called periodically during autonomous

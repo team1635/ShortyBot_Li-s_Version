@@ -43,7 +43,7 @@ public class OI {
 	public OI(){
 		stick = new Joystick(0);	
 //		
-////		new JoystickButton(stick, 1).whenPressed(new FirstCam());
+//		new JoystickButton(stick, 1).whenPressed(new FirstCam());
 //		new JoystickButton(stick, 2).whenPressed(new SecondCam());
 //		new JoystickButton(stick, 3).whenPressed(new StopCam());
 		

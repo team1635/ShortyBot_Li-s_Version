@@ -23,7 +23,7 @@ public class IntakeWithJoystick extends Command {
     protected void execute() {
     	Robot.intaker.Operate(Robot.oi.getJoystick());
     	//Robot.intaker.liftIntaker(Robot.oi.getJoystick());
-    	Robot.intaker.intakeOneButton(Robot.oi.getJoystick());
+    	Robot.intaker.intakerLiftOneButton(Robot.oi.getJoystick());
     }
 
     // Make this return true when this Command no longer needs to run execute()

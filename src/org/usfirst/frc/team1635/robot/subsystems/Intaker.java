@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * @author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ ) 
+ * @author : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
 public class Intaker extends Subsystem {
 	TalonSRX talon;
@@ -34,16 +34,18 @@ public class Intaker extends Subsystem {
 		IntakerLifter = new Solenoid(RobotMap.kIntakerLifterPort);
 
 	}
-	public double ObtainTalonLastSetValue(){ // Made by miguel
+
+	public double ObtainTalonLastSetValue() { // Made by miguel
 		double getTalonValue = talon.get();
-		return getTalonValue; 
-		
-}
-	public void log(){
+		return getTalonValue;
+
+	}
+
+	public void log() {
 		SmartDashboard.putNumber("Pressurelevel", obtainPressureLevel());
 		SmartDashboard.putNumber("TalonSRXlastSetValue", ObtainTalonLastSetValue());
-		
-	} 
+
+	}
 
 	public void Operate(Joystick joy1) {
 		boolean leftInput = joy1.getRawButton(5);
@@ -55,23 +57,24 @@ public class Intaker extends Subsystem {
 			output = 0.0;
 		} else {
 			if (leftInput) {
-				//the left button LB should roll the ball in
+				// the left button LB should roll the ball in
 				output = 1;
-				
-			} else if (rightInput){
+
+			} else if (rightInput) {
 				// the right button RB should roll the ball out
 				output = -1;
 			}
 		}
-		PressureCheck(output,joy1);
+		PressureCheck(output, joy1);
 	}
 
-	public void PressureCheck(double input,Joystick joy_x) {
+	public void PressureCheck(double input, Joystick joy_x) {
 
 		double outputspd = 0.0;
 
 		if (obtainPressureLevel() < RobotMap.kPressureLimit && joy_x.getRawButton(5)) {
-			Timer.delay(0.1);//delay the locking mechanism to allow more grip on the ball
+			Timer.delay(0.1);// delay the locking mechanism to allow more grip
+								// on the ball
 			// for debugging System.out.println("Pressure Detected");
 			outputspd = 0.0;
 		} else {
@@ -93,26 +96,25 @@ public class Intaker extends Subsystem {
 		double pressureLevel = pressuresensor.getValue();
 		return pressureLevel;
 	}
-	
-	
-	public void liftIntaker(Joystick joy2){
-		if (joy2.getRawButton(4)){
+
+	public void liftIntaker(Joystick joy2) {
+		if (joy2.getRawButton(4)) {
 			IntakerLifter.set(true);
-		}else if(joy2.getRawButton(1)){
+		} else if (joy2.getRawButton(1)) {
 			IntakerLifter.set(false);
-		}	
+		}
 	}
-	
-	public void intakeOneButton(Joystick joyy){
-		if(joyy.getRawButton(4)){
-			if(IntakerLifter.get()){
+
+	public void intakerLiftOneButton(Joystick joyy) {
+		if (joyy.getRawButton(4)) {
+			if (IntakerLifter.get()) {
 				IntakerLifter.set(false);
-			}else if (!IntakerLifter.get()){
+			} else if (!IntakerLifter.get()) {
 				IntakerLifter.set(true);
 			}
 		}
-		
 	}
+
 	public void stopIntaker() {
 		talon.set(0);
 	}
