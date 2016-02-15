@@ -111,8 +111,8 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousInit() {
 
-		if (selectAutonomous() != null)
-			selectAutonomous().start();
+		if (auto1 != null)
+			auto1.start();
 	}
 	// if (testAuto != null)
 	// testAuto.start();
@@ -130,8 +130,8 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (selectAutonomous() != null)
-			selectAutonomous().cancel();
+		if (auto1 != null)
+			auto1.cancel();
 	}
 
 	/**
@@ -151,6 +151,7 @@ public class Robot extends IterativeRobot {
 
 	public void log() {
 		intaker.log();
+		drivetrain.log();
 
 	}
 }

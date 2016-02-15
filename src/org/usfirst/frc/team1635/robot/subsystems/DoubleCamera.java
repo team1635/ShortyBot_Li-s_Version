@@ -78,17 +78,17 @@ public class DoubleCamera extends Subsystem {
 	
 	
 	public void runWithOneButton(){
-		boolean belt = false;
+		boolean camSwitch = false;
 		boolean toggle = true;		
 		cameraStatus = stick.getRawButton(2);        
 		 
 		if (toggle && cameraStatus) {  // Only execute once per Button push
 		  toggle = false;  // Prevents this section of code from being called again until the Button is released and re-pressed
-		  if (belt) {  // Decide which way to set the motor this time through (or use this as a motor value instead)
-		    belt= false;
+		  if (camSwitch) {  // Decide which way to set the motor this time through (or use this as a motor value instead)
+		    camSwitch= false;
 		    changeCam(camCenter);
 		  } else {
-		    belt= true;
+		    camSwitch= true;
 		    changeCam(camRight);
 		  }
 		} else if(!cameraStatus) { 

@@ -22,7 +22,9 @@ public class DriveWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.drivetrain.drive(Robot.oi.getJoystick());
-    	Robot.drivetrain.shiftGears(Robot.oi.getJoystick());
+    	//Robot.drivetrain.shiftGears(Robot.oi.getJoystick());
+    	Robot.drivetrain.shiftGearsTwoButton(Robot.oi.getJoystick());
+    	//Robot.drivetrain.getGearStatus();
     }
 
     // Make this return true when this Command no longer needs to run execute()

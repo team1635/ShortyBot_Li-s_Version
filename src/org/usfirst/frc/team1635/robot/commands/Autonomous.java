@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Autonomous extends CommandGroup {
     
     public  Autonomous() {
+    	
+    	addSequential(new DriveTimeout(-0.75, -0.75, 7));
     	        // Add Commands here:
         //addSequential(new Command1());
         //addSequential(new Command2());

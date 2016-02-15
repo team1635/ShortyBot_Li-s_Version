@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @Authors : Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
@@ -45,6 +46,10 @@ public class DriveTrain extends Subsystem {
 		LiveWindow.addActuator("Drive Train", "Back Right Motor", (Victor) backRight);
 
 	}
+	
+	public void log(){
+		SmartDashboard.putBoolean("gearStatus", gearShifter.get());
+	}
 
 	public void drive(Joystick joy) {
 		// driveSquared( -1 * joy.getY() , -1 * joy.getRawAxis(5) * 0.9);
@@ -69,6 +74,23 @@ public class DriveTrain extends Subsystem {
 
 	public void driveWithParameters(double left, double right) {
 		drive.tankDrive(left, right);
+	}
+	
+	public void shiftGearsTwoButton(Joystick joy){
+		if(joy.getRawButton(9)){
+			gearShifter.set(false);
+		}else if(joy.getRawButton(10)){
+			gearShifter.set(true);
+		}
+	}
+	
+	public void getGearStatus(){
+		if(!gearShifter.get()){
+			System.out.println("high gear");
+			//SmartDashboard.put
+		}else{
+			System.out.println("low gear");
+		}
 	}
 
 	public void shiftGears(Joystick stick) {// button x
