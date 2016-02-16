@@ -4,10 +4,13 @@ package org.usfirst.frc.team1635.robot.subsystems;
 import org.usfirst.frc.team1635.robot.RobotMap;
 import org.usfirst.frc.team1635.robot.commands.DriveWithJoystick;
 
+import NavxMXP.AHRS;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -20,8 +23,12 @@ public class DriveTrain extends Subsystem {
 	private SpeedController frontLeft, backLeft, frontRight, backRight;
 	private RobotDrive drive;
 	private Solenoid gearShifter;
+	SerialPort serial_port;
+	double degrees;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
+	AHRS imu; // This class can only be used w/the navX MXP.
+	boolean first_iteration, onTarget, direction;
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -45,9 +52,42 @@ public class DriveTrain extends Subsystem {
 		LiveWindow.addActuator("Drive Train", "Front Right Motor", (Victor) frontRight);
 		LiveWindow.addActuator("Drive Train", "Back Right Motor", (Victor) backRight);
 
+		try {
+			serial_port = new SerialPort(57600, SerialPort.Port.kMXP);
+
+			byte update_rate_hz = 50;
+			// imu = new IMU(serial_port,update_rate_hz);
+			// imu = new IMUAdvanced(serial_port,update_rate_hz);
+			imu = new AHRS(serial_port, update_rate_hz);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+
+		}
+
+		if (imu != null) {
+			LiveWindow.addSensor("IMU", "Gyro", imu);
+		}
+		first_iteration = true;
+
+		// When calibration has completed, zero the yaw
+		// Calibration is complete approaximately 20 seconds
+		// after the robot is powered on. During calibration,
+		// the robot should be still
+
+		boolean is_calibrating = imu.isCalibrating();
+		if (first_iteration && !is_calibrating) {
+			Timer.delay(0.3);
+			imu.zeroYaw();
+			first_iteration = false;
+		}
+
 	}
-	
-	public void log(){
+
+	public double obtainYaw() {
+		return imu.getYaw();
+	}
+
+	public void log() {
 		SmartDashboard.putBoolean("gearStatus", gearShifter.get());
 	}
 
@@ -75,20 +115,20 @@ public class DriveTrain extends Subsystem {
 	public void driveWithParameters(double left, double right) {
 		drive.tankDrive(left, right);
 	}
-	
-	public void shiftGearsTwoButton(Joystick joy){
-		if(joy.getRawButton(9)){
+
+	public void shiftGearsTwoButton(Joystick joy) {
+		if (joy.getRawButton(9)) {
 			gearShifter.set(false);
-		}else if(joy.getRawButton(10)){
+		} else if (joy.getRawButton(10)) {
 			gearShifter.set(true);
 		}
 	}
-	
-	public void getGearStatus(){
-		if(!gearShifter.get()){
+
+	public void getGearStatus() {
+		if (!gearShifter.get()) {
 			System.out.println("high gear");
-			//SmartDashboard.put
-		}else{
+			// SmartDashboard.put
+		} else {
 			System.out.println("low gear");
 		}
 	}
@@ -102,5 +142,58 @@ public class DriveTrain extends Subsystem {
 			}
 		}
 	}
+
+	public boolean isOnTarget() {
+		return onTarget;
+	}
+
+	public void setRotation(double deg, boolean dir) {
+		imu.zeroYaw();
+		this.degrees = deg;
+		this.direction = dir;
+	}
+
+	/*
+	 * rotate to a certain angle
+	 */
+	public void AngularRotation() {
+		onTarget = false;
+		if (direction) {// turn to the right
+			if (obtainYaw() < degrees + 1.5 && obtainYaw() > degrees - 1.5) {
+				drive.tankDrive(0, 0);
+				onTarget = true;
+			} else {
+				drive.tankDrive(-0.23, 0.23);
+			}
+		} else if (direction == false) {// turn to the left
+			double inverted = -degrees;
+			if (obtainYaw() < inverted + 1.5 && obtainYaw() > inverted - 1.5) {
+				drive.tankDrive(0, 0);
+				onTarget = true;
+			} else {
+				drive.tankDrive(0.23, -0.23);
+			}
+		}
+	}
 	
+	public void correctWhileDriving() {
+		if (obtainYaw() > 0) {
+			if (obtainYaw() < 1.5 && obtainYaw() > 0) {
+				drive.tankDrive(-0.23, -0.23);
+			} else if (obtainYaw() > 1.5 && obtainYaw() < 4) {
+				drive.tankDrive(0.15, -0.15);
+			} else if (obtainYaw() > 4) {
+				drive.tankDrive(0.23, -0.23);
+			}
+		} else if (obtainYaw() < 0) {
+			if (obtainYaw() > -1.5 && obtainYaw() < 0) {
+				drive.tankDrive(-0.23, -0.23);
+			} else if (obtainYaw() < -1.5 && obtainYaw() > -4) {
+				drive.tankDrive(-0.15, 0.15);
+			} else if (obtainYaw() < -4) {
+				drive.tankDrive(-0.23, 0.23);
+			}
+		}
+	}
+
 }
