@@ -17,6 +17,7 @@ public class Intaker extends Subsystem {
 	TalonSRX talon;
 	AnalogInput pressuresensor;
 	Solenoid IntakerLifter;
+	boolean onTarget;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -31,6 +32,8 @@ public class Intaker extends Subsystem {
 		talon = new TalonSRX(RobotMap.kIntakerTalonPort);
 		pressuresensor = new AnalogInput(RobotMap.kPressureAnalogPort);
 		IntakerLifter = new Solenoid(RobotMap.kIntakerLifterPort);
+		
+		onTarget = false;
 
 	}
 
@@ -57,11 +60,11 @@ public class Intaker extends Subsystem {
 		} else {
 			if (leftInput) {
 				// the left button LB should roll the ball in
-				output = 1;
+				output = -1;
 
 			} else if (rightInput) {
 				// the right button RB should roll the ball out
-				output = -1;
+				output = 1;
 			}
 		}
 		PressureCheck(output, joy1);
@@ -72,10 +75,11 @@ public class Intaker extends Subsystem {
 		double outputspd = 0.0;
 
 		if (obtainPressureLevel() < RobotMap.kPressureLimit && joy_x.getRawButton(5)) {
-			Timer.delay(0.1);// delay the locking mechanism to allow more grip
+			Timer.delay(0.05);// delay the locking mechanism to allow more grip
 								// on the ball
 			// for debugging System.out.println("Pressure Detected");
 			outputspd = 0.0;
+			raiseIntaker();
 		} else {
 			outputspd = input;
 			// for debugging System.out.println("Pressure null");
@@ -112,6 +116,43 @@ public class Intaker extends Subsystem {
 				IntakerLifter.set(true);
 			}
 		}
+	}
+	
+	public void rollIn(){
+		if(obtainPressureLevel() < RobotMap.kPressureLimit){
+			Timer.delay(0.05);
+			talon.set(0);
+			onTarget =true;
+		} else {
+			talon.set(-1);
+		}
+	}
+	/**
+	 * supposed to work with timeouts
+	 */
+	public void rollOut(){
+		//double time = System.currentTimeMillis();
+		talon.set(-1);
+		Timer.delay(1);
+		talon.set(0);
+		onTarget = true;
+	}
+
+	public void raiseIntaker() {
+		IntakerLifter.set(true);
+		if(IntakerLifter.get()){
+			onTarget = true;
+		}
+	}
+
+	public void lowerIntaker() {
+		IntakerLifter.set(false);
+		if(!IntakerLifter.get()){
+			onTarget = true;
+		}
+	}
+	public boolean isOnTarget(){
+		return onTarget;		
 	}
 
 	public void stopIntaker() {

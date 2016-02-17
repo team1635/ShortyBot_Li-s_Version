@@ -1,5 +1,9 @@
 package org.usfirst.frc.team1635.robot;
 
+
+import org.usfirst.frc.team1635.robot.commands.Raise_LowerIntaker;
+import org.usfirst.frc.team1635.robot.commands.RollIn_RaiseAuto;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -42,7 +46,10 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public OI(){
-		stick = new Joystick(0);	
+		stick = new Joystick(0);
+		
+		new JoystickButton(stick, 3).whenPressed(new Raise_LowerIntaker(true));
+		new JoystickButton(stick, 4).whenPressed(new Raise_LowerIntaker(false));
 		
 	}
 	

@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		drivetrain = new DriveTrain();
 		intaker = new Intaker();
 		climber = new Lifter();
-		
+		// the oi has to be initialized before doublecamera is initialized
 		oi = new OI();
 		doublecamera = new DoubleCamera();
 		// chooser = new SendableChooser();

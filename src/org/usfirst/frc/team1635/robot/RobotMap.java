@@ -11,12 +11,12 @@ package org.usfirst.frc.team1635.robot;
 public class RobotMap {
 	//PWM ports
 	public static int kDriveTrain_FrontLeftMotorController = 1;//0
-	public static int kDriveTrain_BackLeftMotorController = 0;
-	public static int kDriveTrain_FrontRightMotorController = 3;//1
-	public static int kDriveTrain_BackRightMotorController = 2;//3
-	public static int kIntakerTalonPort = 6;//0
-	public static int kLeftWinchPort = 4;
-	public static int kRightWinchPort = 5;
+	public static int kDriveTrain_BackLeftMotorController = 0;//0 official
+	public static int kDriveTrain_FrontRightMotorController = 3;//3
+	public static int kDriveTrain_BackRightMotorController = 2;//2
+	public static int kIntakerTalonPort = 6;//used to be 3
+	public static int kLeftWinchPort = 4;//official
+	public static int kRightWinchPort = 5;//official
 	
 	//constants
     public static int kPressureLimit = 15;

@@ -82,7 +82,10 @@ public class DriveTrain extends Subsystem {
 		}
 
 	}
-
+    /**
+     * f you if you don't understand
+     * @return gyroscope angles
+     */
 	public double obtainYaw() {
 		return imu.getYaw();
 	}
@@ -102,7 +105,10 @@ public class DriveTrain extends Subsystem {
 	public void unlimitedDrive(double leftspd, double rightspd) {
 		drive.tankDrive(-leftspd, -rightspd);
 	}
-
+/**
+ * 
+ * @param MLGstick Most Horrible Driving Method Yet  IGN-1000/10    "Horrible Never Again" - Forbes
+ */
 	public void Chrys_s_DeeznutsIllegalDriveMethod(Joystick MLGstick) {
 		drive.tankDrive(MLGstick.getY(), MLGstick.getRawAxis(5));
 
@@ -146,14 +152,18 @@ public class DriveTrain extends Subsystem {
 	public boolean isOnTarget() {
 		return onTarget;
 	}
-
+    /**
+     * set the direction and degrees for rotation
+     * @param deg angles for rotation
+     * @param dir direction for rotation: true - clockwise, false - counterClockwise 
+     */
 	public void setRotation(double deg, boolean dir) {
 		imu.zeroYaw();
 		this.degrees = deg;
 		this.direction = dir;
 	}
 
-	/*
+	/**
 	 * rotate to a certain angle
 	 */
 	public void AngularRotation() {
@@ -175,7 +185,9 @@ public class DriveTrain extends Subsystem {
 			}
 		}
 	}
-	
+	/**
+	 * Drive while maintaining the correct direction with the gyro on the NavX 
+	 */
 	public void correctWhileDriving() {
 		if (obtainYaw() > 0) {
 			if (obtainYaw() < 1.5 && obtainYaw() > 0) {
