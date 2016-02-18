@@ -1,13 +1,13 @@
 package NavxComm;
 
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) Kauai Labs 2013. All Rights Reserved.                       */
+/* Copyright (c) Li Labs 2016. All Rights Reserved.                       */
 /*                                                                            */
-/* Created in support of Team 2465 (Kauaibots).  Go Thunderchicken!           */
+/* Created in support of Team 1635 (TECHNOTICS).  Go SKRUBS!           */
 /*                                                                            */
 /* Open Source Software - may be modified and shared by FRC teams. Any        */
 /* modifications to this code must be accompanied by the nav6_License.txt file*/ 
-/* in the root directory of the project.                                      */
+/* in the root directory of the project. GPLv3                                   */
 /*----------------------------------------------------------------------------*/
 
 

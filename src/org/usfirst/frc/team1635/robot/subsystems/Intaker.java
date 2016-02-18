@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Intaker extends Subsystem {
 	TalonSRX talon;
 	AnalogInput pressuresensor;
-	Solenoid IntakerLifter;
+	Solenoid intakerLifter;
 	boolean onTarget;
 
 	// Put methods for controlling this subsystem
@@ -31,7 +31,7 @@ public class Intaker extends Subsystem {
 
 		talon = new TalonSRX(RobotMap.kIntakerTalonPort);
 		pressuresensor = new AnalogInput(RobotMap.kPressureAnalogPort);
-		IntakerLifter = new Solenoid(RobotMap.kIntakerLifterPort);
+		intakerLifter = new Solenoid(RobotMap.kIntakerLifterPort);
 		
 		onTarget = false;
 
@@ -49,7 +49,7 @@ public class Intaker extends Subsystem {
 
 	}
 
-	public void Operate(Joystick joy1) {
+	public void operate(Joystick joy1) {
 		boolean leftInput = joy1.getRawButton(5);
 		boolean rightInput = joy1.getRawButton(6);
 		double output = 0.0;
@@ -92,7 +92,7 @@ public class Intaker extends Subsystem {
 		talon.set(finalInput);
 	}
 
-	/*
+	/**
 	 * obtain the pressure from the pressure sensor
 	 */
 	public double obtainPressureLevel() {
@@ -100,20 +100,20 @@ public class Intaker extends Subsystem {
 		return pressureLevel;
 	}
 
-	public void liftIntaker(Joystick joy2) {
-		if (joy2.getRawButton(4)) {
-			IntakerLifter.set(true);
-		} else if (joy2.getRawButton(1)) {
-			IntakerLifter.set(false);
+	public void raise_LowerIntaker(Joystick joy2) {
+		if (joy2.getRawButton(3)) {
+			intakerLifter.set(true);
+		} else if (joy2.getRawButton(4)) {
+			intakerLifter.set(false);
 		}
 	}
 
 	public void intakerLiftOneButton(Joystick joyy) {
 		if (joyy.getRawButton(4)) {
-			if (IntakerLifter.get()) {
-				IntakerLifter.set(false);
-			} else if (!IntakerLifter.get()) {
-				IntakerLifter.set(true);
+			if (intakerLifter.get()) {
+				intakerLifter.set(false);
+			} else if (!intakerLifter.get()) {
+				intakerLifter.set(true);
 			}
 		}
 	}
@@ -132,22 +132,22 @@ public class Intaker extends Subsystem {
 	 */
 	public void rollOut(){
 		//double time = System.currentTimeMillis();
-		talon.set(-1);
-		Timer.delay(1);
+		talon.set(1);
+		Timer.delay(0.5);
 		talon.set(0);
 		onTarget = true;
 	}
 
 	public void raiseIntaker() {
-		IntakerLifter.set(true);
-		if(IntakerLifter.get()){
+		intakerLifter.set(false);
+		if(!intakerLifter.get()){
 			onTarget = true;
 		}
 	}
 
 	public void lowerIntaker() {
-		IntakerLifter.set(false);
-		if(!IntakerLifter.get()){
+		intakerLifter.set(true);
+		if(intakerLifter.get()){
 			onTarget = true;
 		}
 	}

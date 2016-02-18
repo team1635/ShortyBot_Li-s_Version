@@ -33,4 +33,9 @@ public class RobotMap {
     //DIO ports
     public static int kFirstSwitchPort = 0;
     public static int kSecondSwitchPort =1;
+    
+    //4 the camera
+    public static final String camNameCenter = "cam0";
+	public static final String camNameRight = "cam1";
+	public static final int imgQuality = 15;
 }

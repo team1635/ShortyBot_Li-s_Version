@@ -82,10 +82,12 @@ public class DriveTrain extends Subsystem {
 		}
 
 	}
-    /**
-     * f you if you don't understand
-     * @return gyroscope angles
-     */
+
+	/**
+	 * f you if you don't understand
+	 * 
+	 * @return gyroscope angles
+	 */
 	public double obtainYaw() {
 		return imu.getYaw();
 	}
@@ -105,12 +107,15 @@ public class DriveTrain extends Subsystem {
 	public void unlimitedDrive(double leftspd, double rightspd) {
 		drive.tankDrive(-leftspd, -rightspd);
 	}
-/**
- * 
- * @param MLGstick Most Horrible Driving Method Yet  IGN-1000/10    "Horrible Never Again" - Forbes
- */
-	public void Chrys_s_DeeznutsIllegalDriveMethod(Joystick MLGstick) {
-		drive.tankDrive(MLGstick.getY(), MLGstick.getRawAxis(5));
+
+	/**
+	 * 
+	 * @param REKTstick
+	 *            Most Horrible Driving Method Yet IGN-1000/10
+	 *            "Horrible Never Again" - Forbes
+	 */
+	public void Chrys_s_DeeznutsIllegalDriveMethod(Joystick REKTstick) {
+		drive.tankDrive(REKTstick.getY(), REKTstick.getRawAxis(5));
 
 	}
 
@@ -152,11 +157,16 @@ public class DriveTrain extends Subsystem {
 	public boolean isOnTarget() {
 		return onTarget;
 	}
-    /**
-     * set the direction and degrees for rotation
-     * @param deg angles for rotation
-     * @param dir direction for rotation: true - clockwise, false - counterClockwise 
-     */
+
+	/**
+	 * set the direction and degrees for rotation
+	 * 
+	 * @param deg
+	 *            angles for rotation
+	 * @param dir
+	 *            direction for rotation: true - clockwise, false -
+	 *            counterClockwise
+	 */
 	public void setRotation(double deg, boolean dir) {
 		imu.zeroYaw();
 		this.degrees = deg;
@@ -176,7 +186,7 @@ public class DriveTrain extends Subsystem {
 				drive.tankDrive(-0.23, 0.23);
 			}
 		} else if (direction == false) {// turn to the left
-			double inverted = -degrees;
+			double inverted = - degrees;
 			if (obtainYaw() < inverted + 1.5 && obtainYaw() > inverted - 1.5) {
 				drive.tankDrive(0, 0);
 				onTarget = true;
@@ -185,8 +195,9 @@ public class DriveTrain extends Subsystem {
 			}
 		}
 	}
+
 	/**
-	 * Drive while maintaining the correct direction with the gyro on the NavX 
+	 * Drive while maintaining the correct direction with the gyro on the NavX
 	 */
 	public void correctWhileDriving() {
 		if (obtainYaw() > 0) {

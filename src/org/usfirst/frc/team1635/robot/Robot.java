@@ -12,7 +12,6 @@ import org.usfirst.frc.team1635.robot.commands.Autonomous2;
 import org.usfirst.frc.team1635.robot.commands.Autonomous3;
 import org.usfirst.frc.team1635.robot.commands.Autonomous4;
 import org.usfirst.frc.team1635.robot.commands.DriveTimeout;
-import org.usfirst.frc.team1635.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team1635.robot.subsystems.Lifter;
 import org.usfirst.frc.team1635.robot.subsystems.DoubleCamera;
 import org.usfirst.frc.team1635.robot.subsystems.DriveTrain;

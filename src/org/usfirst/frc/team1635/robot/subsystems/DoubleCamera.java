@@ -1,7 +1,8 @@
 package org.usfirst.frc.team1635.robot.subsystems;
 
-import org.usfirst.frc.team1635.robot.Config;
+
 import org.usfirst.frc.team1635.robot.Robot;
+import org.usfirst.frc.team1635.robot.RobotMap;
 import org.usfirst.frc.team1635.robot.commands.DualCameras;
 
 import com.ni.vision.NIVision;
@@ -27,17 +28,17 @@ public class DoubleCamera extends Subsystem {
     // here. Call these from Commands.
 	public DoubleCamera(){
 		
-//		stick = Robot.oi.getJoystick();
-//		// Get camera ids by supplying camera name ex 'cam0', found on roborio web interface
-//        camCenter = NIVision.IMAQdxOpenCamera(Config.CameraFeeds.camNameCenter, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-//        camRight = NIVision.IMAQdxOpenCamera(Config.CameraFeeds.camNameRight, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-//        curCam = camCenter;
-//        // Img that will contain camera img
-//        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-//        // Server that we'll give the img to
-//        server = CameraServer.getInstance();
-//        server.setQuality(Config.CameraFeeds.imgQuality);
-//        server.setSize(0);// limit the resolution to 160*120
+		stick = Robot.oi.getJoystick();
+		// Get camera ids by supplying camera name ex 'cam0', found on roborio web interface
+        camCenter = NIVision.IMAQdxOpenCamera(RobotMap.camNameCenter, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        camRight = NIVision.IMAQdxOpenCamera(RobotMap.camNameRight, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        curCam = camCenter;
+        // Img that will contain camera img
+        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+        // Server that we'll give the img to
+        server = CameraServer.getInstance();
+        server.setQuality(RobotMap.imgQuality);
+        server.setSize(0);// limit the resolution to 160*120
         
         
 	}
@@ -56,7 +57,7 @@ public class DoubleCamera extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new DualCameras());
+        setDefaultCommand(new DualCameras());
     }
     public void init()
 	{

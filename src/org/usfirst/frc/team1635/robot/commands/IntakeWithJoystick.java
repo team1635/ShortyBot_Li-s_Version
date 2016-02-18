@@ -21,8 +21,8 @@ public class IntakeWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intaker.Operate(Robot.oi.getJoystick());
-    	//Robot.intaker.liftIntaker(Robot.oi.getJoystick());
+    	Robot.intaker.operate(Robot.oi.getJoystick());
+    	Robot.intaker.raise_LowerIntaker(Robot.oi.getJoystick());
     	//Robot.intaker.intakerLiftOneButton(Robot.oi.getJoystick());
     }
 

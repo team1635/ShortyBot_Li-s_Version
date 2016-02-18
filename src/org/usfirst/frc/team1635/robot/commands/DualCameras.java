@@ -1,8 +1,6 @@
 package org.usfirst.frc.team1635.robot.commands;
 
 import org.usfirst.frc.team1635.robot.Robot;
-import org.usfirst.frc.team1635.robot.subsystems.DoubleCamera;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
