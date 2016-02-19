@@ -24,7 +24,7 @@ public class DriveTrain extends Subsystem {
 	private RobotDrive drive;
 	private Solenoid gearShifter;
 	SerialPort serial_port;
-	double degrees;
+	double degrees, DistanceToStop;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	AHRS imu; // This class can only be used w/the navX MXP.
@@ -185,7 +185,7 @@ public class DriveTrain extends Subsystem {
 			} else {
 				drive.tankDrive(-0.23, 0.23);
 			}
-		} else if (direction == false) {// turn to the left
+		} else if (!direction) {// turn to the left
 			double inverted = - degrees;
 			if (obtainYaw() < inverted + 1.5 && obtainYaw() > inverted - 1.5) {
 				drive.tankDrive(0, 0);
@@ -217,6 +217,38 @@ public class DriveTrain extends Subsystem {
 				drive.tankDrive(-0.23, 0.23);
 			}
 		}
+	}
+	
+	public double convertNavXtoInches(){
+		double inches = imu.getDisplacementX() * 1.116;
+		return inches;
+	}
+
+	public void setDistToStop(double dist_) {
+		this.DistanceToStop = dist_;
+	}
+
+	public void NavxDriveToSetPoint() {
+		//double dist = imu.getDisplacementX();
+		double dist = convertNavXtoInches();
+		SmartDashboard.putNumber("autonomous distance", dist);
+
+		if (dist >= DistanceToStop) {
+			drive.tankDrive(0, 0);
+			onTarget = true;
+		} else {
+			drive.tankDrive(-0.3, -0.3);
+		}
+	}
+	public void brake() {
+		drive.tankDrive(0.4, 0.4);
+		Timer.delay(0.2);
+		drive.tankDrive(0, 0);
+	}
+ 
+	public void unlimitedDrive(double spd) {
+		drive.tankDrive(spd, spd);
+		SmartDashboard.putNumber("vertical displacement", imu.getDisplacementY());
 	}
 
 }

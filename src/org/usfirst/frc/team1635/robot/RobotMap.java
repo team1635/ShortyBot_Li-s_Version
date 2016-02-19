@@ -25,10 +25,10 @@ public class RobotMap {
     public static int kPressureAnalogPort = 3;//0
     
    //solenoid ports on the PCM 
-    public static int kIntakerLifterPort = 1;//solenoid
+    public static int kIntakerLifterPort = 4;//solenoid
     public static int kHookExtenderPort = 3;//TODO used to be port 0
     public static int kHookRaiserPort = 2;
-    public static int kGearShifterPort = 4;
+    public static int kGearShifterPort = 0;
     
     //DIO ports
     public static int kFirstSwitchPort = 0;

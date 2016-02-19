@@ -9,7 +9,13 @@ public class Autonomous extends CommandGroup {
     
     public  Autonomous() {
     	
-    	addSequential(new DriveTimeout(0.75, 0.75, 7));
+    	addSequential(new DriveTimeout(0.75, 0.75, 7));// drive a short distance
+    	addSequential(new RollIn_OutTheBall(true));//pick up the ball
+    	addSequential(new Raise_LowerIntaker(true));//raise intaker
+    	addSequential(new DriveTimeout(0.75, 0.75, 7));//drive 
+    	addSequential(new RotateToSetPoint(45, false));// rotate to aim at the target
+    	addSequential(new Raise_LowerIntaker(false));//lower the intaker
+    	addSequential(new RollIn_OutTheBall(false));// shoot out the ball
     	        // Add Commands here:
         //addSequential(new Command1());
         //addSequential(new Command2());

@@ -5,39 +5,32 @@ import org.usfirst.frc.team1635.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *true- clockwise, false - counterclockwise
+ *
  */
-public class RotateToSetPoint extends Command {
-	private double rotation;
-	boolean dirrection;
-	
-	/**
-	 *true- clockwise, false - counterclockwise
-	 */
-    public RotateToSetPoint(double rot, boolean direction) {
-    	this.rotation=rot;
-    	this.dirrection = direction;
+public class Brake extends Command {
+	//double tim3,speed;
+
+    public Brake(double timeout) {
     	
-    	
+    	requires(Robot.drivetrain);
+    	setTimeout(timeout);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.setRotation(rotation, dirrection);  	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.AngularRotation();
-    	Robot.drivetrain.log();
+    	Robot.drivetrain.brake();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.drivetrain.isOnTarget();
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

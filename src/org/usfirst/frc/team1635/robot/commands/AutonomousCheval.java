@@ -5,9 +5,19 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  * @author: Jing Wei Li (SKRUB_HUNTER) , Miguel Cruz (@Acelogic_ )
  */
-public class Autonomous2 extends CommandGroup {
+public class AutonomousCheval extends CommandGroup {
     
-    public  Autonomous2() {
+    public  AutonomousCheval() {
+    	
+    	addSequential(new DriveTimeout(-0.75,-0.75, 3));// drive to the ball
+    	addSequential(new RollIn_OutTheBall(true));//pick up the ball
+    	addSequential(new Raise_LowerIntaker(true));//raise intaker
+    	addSequential(new DriveTimeout(0.75, 0.75, 7));//drive to the cheval
+    	addSequential(new Raise_LowerIntaker(false));//bring down the cheval
+    	addSequential(new DriveTimeout(0.75, 0.75, 7));//drive over the cheval
+    	addSequential(new RotateToSetPoint(45, false));// rotate to aim at the target
+    	addSequential(new Raise_LowerIntaker(false));//lower the intaker
+    	addSequential(new RollIn_OutTheBall(false));// shoot out the ball
     	        // Add Commands here:
         //addSequential(new Command1());
         //addSequential(new Command2());

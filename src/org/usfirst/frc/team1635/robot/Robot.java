@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team1635.robot.commands.Autonomous;
-import org.usfirst.frc.team1635.robot.commands.Autonomous2;
+import org.usfirst.frc.team1635.robot.commands.AutonomousCheval;
 import org.usfirst.frc.team1635.robot.commands.Autonomous3;
 import org.usfirst.frc.team1635.robot.commands.Autonomous4;
 import org.usfirst.frc.team1635.robot.commands.DriveTimeout;
@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
 		swich2 = new DigitalInput(RobotMap.kSecondSwitchPort);
 
 		auto1 = new Autonomous();
-		auto2 = new Autonomous2();
+		auto2 = new AutonomousCheval();
 		auto3 = new Autonomous3();
 		auto4 = new Autonomous4();
 
@@ -112,10 +112,10 @@ public class Robot extends IterativeRobot {
 
 		if (auto1 != null)
 			auto1.start();
+//		if (selectAutonomous() != null)
+//			selectAutonomous().start();
 	}
-	// if (testAuto != null)
-	// testAuto.start();
-	// }
+	
 
 	/**
 	 * This function is called periodically during autonomous
