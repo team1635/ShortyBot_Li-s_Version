@@ -14,9 +14,9 @@ public class RobotMap {
 	public static int kDriveTrain_BackLeftMotorController = 0;//0 official
 	public static int kDriveTrain_FrontRightMotorController = 3;//3
 	public static int kDriveTrain_BackRightMotorController = 2;//2
-	public static int kIntakerTalonPort = 6;//used to be 3
-	public static int kLeftWinchPort = 4;//official
-	public static int kRightWinchPort = 5;//official
+	public static int kIntakerTalonPort = 4;//used to be 3
+	public static int kLeftWinchPort = 5;//official
+	public static int kRightWinchPort = 6;//official
 	
 	//constants
     public static int kPressureLimit = 15;
