@@ -65,7 +65,7 @@ public class Robot extends IterativeRobot {
 		auto3 = new Autonomous3();
 		auto4 = new Autonomous4();
 
-		SmartDashboard.putData("timeoutAuto", new DriveTimeout(0.5, 0.5, 17));
+		SmartDashboard.putData("timeoutAuto", new DriveTimeout(0.75, 17));
 
 		// testAuto = new DriveTimeout();
 
@@ -95,6 +95,7 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		Robot.drivetrain.reset();
 	}
 
 	/**

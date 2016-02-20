@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Raise_LowerIntaker extends Command {
 	boolean isRaising;
 
-	
+	/**
+	 * @param isRaising_Lowering true - raise intaker, false - lower intaker
+	 */
 	public Raise_LowerIntaker(boolean isRaising_Lowering) {
 		this.isRaising = isRaising_Lowering;
 		// Use requires() here to declare subsystem dependencies

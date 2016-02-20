@@ -29,7 +29,7 @@ public class RollIn_OutTheBall extends Command {
 		if (isIn) {
 			Robot.intaker.rollIn();
 		} else if (!isIn) {
-			Robot.intaker.rollOut();
+			Robot.intaker.rollOutShooting();
 		}
 	}
 

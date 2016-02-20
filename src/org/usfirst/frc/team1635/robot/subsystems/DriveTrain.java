@@ -98,7 +98,7 @@ public class DriveTrain extends Subsystem {
 
 	public void drive(Joystick joy) {
 		// driveSquared( -1 * joy.getY() , -1 * joy.getRawAxis(5) * 0.9);
-		drive.tankDrive(-joy.getY(), -joy.getRawAxis(5));
+		drive.tankDrive(joy.getY(), joy.getRawAxis(5));
 	}
 
 	/*
@@ -218,6 +218,15 @@ public class DriveTrain extends Subsystem {
 			}
 		}
 	}
+	public void reset() {
+		imu.zeroYaw();
+		// sonar.resetAccumulator();
+		onTarget = false;
+		imu.resetDisplacement();
+
+		// getDistanceSonar()=0;
+	}
+
 	
 	public double convertNavXtoInches(){
 		double inches = imu.getDisplacementX() * 1.116;

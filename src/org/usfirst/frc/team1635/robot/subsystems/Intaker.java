@@ -17,7 +17,8 @@ public class Intaker extends Subsystem {
 	TalonSRX talon;
 	AnalogInput pressuresensor;
 	Solenoid intakerLifter;
-	boolean onTarget;
+	boolean onTarget, isPressureChecked;
+	double currentpl, pl1, pl2, pl3, pl4, pl5;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -32,7 +33,7 @@ public class Intaker extends Subsystem {
 		talon = new TalonSRX(RobotMap.kIntakerTalonPort);
 		pressuresensor = new AnalogInput(RobotMap.kPressureAnalogPort);
 		intakerLifter = new Solenoid(RobotMap.kIntakerLifterPort);
-		
+
 		onTarget = false;
 
 	}
@@ -61,24 +62,41 @@ public class Intaker extends Subsystem {
 			if (leftInput) {
 				// the left button LB should roll the ball in
 				output = -1;
+				// rollIn();
 
 			} else if (rightInput) {
 				// the right button RB should roll the ball out
 				output = 1;
+				// rollOutShooting();
 			}
 		}
 		PressureCheck(output, joy1);
+		// checkPressureHistory(joy1);
+	}
+
+	public boolean checkPressureHistory() {
+		isPressureChecked = false;
+		if ((currentpl < RobotMap.kPressureLimit) && (pl1 < RobotMap.kPressureLimit)
+				&& (pl2 < RobotMap.kPressureLimit)) {
+			isPressureChecked = true;
+		}
+		return isPressureChecked;
 	}
 
 	public void PressureCheck(double input, Joystick joy_x) {
 
 		double outputspd = 0.0;
+		// the following method sets the current pressure level currentpl
+		double lastPressure = obtainPressureLevel();
+		System.out.println(" pressure" + lastPressure);
 
-		if (obtainPressureLevel() < RobotMap.kPressureLimit && joy_x.getRawButton(5)) {
-			Timer.delay(0.05);// delay the locking mechanism to allow more grip
-								// on the ball
+		if (checkPressureHistory() && joy_x.getRawButton(5)) {
+			// Timer.delay(0.05);// delay the locking mechanism to allow more
+			// grip
+			// on the ball
 			// for debugging System.out.println("Pressure Detected");
 			outputspd = 0.0;
+			stopIntaker();
 			raiseIntaker();
 		} else {
 			outputspd = input;
@@ -96,8 +114,16 @@ public class Intaker extends Subsystem {
 	 * obtain the pressure from the pressure sensor
 	 */
 	public double obtainPressureLevel() {
-		double pressureLevel = pressuresensor.getValue();
-		return pressureLevel;
+		pl5 = pl4;
+		pl4 = pl3;
+		pl3 = pl2;
+		pl2 = pl1;
+		pl1 = currentpl;
+		currentpl = pressuresensor.getValue();
+		return currentpl;
+
+		// double pressureLevel = pressuresensor.getValue();
+		// return pressureLevel;
 	}
 
 	public void raise_LowerIntaker(Joystick joy2) {
@@ -117,42 +143,56 @@ public class Intaker extends Subsystem {
 			}
 		}
 	}
-	
-	public void rollIn(){
-		if(obtainPressureLevel() < RobotMap.kPressureLimit){
-			Timer.delay(0.05);
+
+	public void rollIn() {
+		if (obtainPressureLevel() < RobotMap.kPressureLimit) {
+			// Timer.delay(0.05);
 			talon.set(0);
-			onTarget =true;
+			onTarget = true;
+
 		} else {
 			talon.set(-1);
+			// Timer.delay(1);
+			// talon.set(0);
 		}
 	}
+
 	/**
-	 * supposed to work with timeouts
+	 * shoot the ball to target
 	 */
-	public void rollOut(){
-		//double time = System.currentTimeMillis();
+	public void rollOutShooting() {
 		talon.set(1);
-		Timer.delay(0.5);
+		Timer.delay(1);
+		talon.set(0);
+		onTarget = true;
+	}
+
+	/**
+	 * pass the ball to alliance robot
+	 */
+	public void rollOutPassing() {
+		talon.set(1);
+		Timer.delay(0.5);// less force when passing
 		talon.set(0);
 		onTarget = true;
 	}
 
 	public void raiseIntaker() {
 		intakerLifter.set(false);
-		if(!intakerLifter.get()){
+		if (!intakerLifter.get()) {
 			onTarget = true;
 		}
 	}
 
 	public void lowerIntaker() {
 		intakerLifter.set(true);
-		if(intakerLifter.get()){
+		if (intakerLifter.get()) {
 			onTarget = true;
 		}
 	}
-	public boolean isOnTarget(){
-		return onTarget;		
+
+	public boolean isOnTarget() {
+		return onTarget;
 	}
 
 	public void stopIntaker() {
